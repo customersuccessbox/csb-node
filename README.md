@@ -2,7 +2,12 @@
 
 #### Using npm:
 ```shell script
-$ npm i --save csb-node
+$ npm i csb-node --save
+```
+
+#### Using in Browser:
+```html
+<script src="https://unpkg.com/csb-node@1.0.0/dist/web/csb.js"></script>
 ```
 
 ##### Create CSB Instance
