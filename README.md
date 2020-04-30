@@ -7,12 +7,20 @@ $ npm i csb-node --save
 
 #### Using in Browser:
 ```html
-<script src="https://unpkg.com/csb-node@1.0.0/dist/web/csb.js"></script>
+<script src="https://unpkg.com/csb-node@1.0.1/dist/web/csb.min.js"></script>
+<script type="text/javascript">
+    let CSB = window['CSB']['default'];
+    let CSBInstance = new CSB(
+      'https://{{domain}}.customersuccessbox.com',
+      '{{secret}}'
+    );
+</script>
 ```
 
-##### Create CSB Instance
+##### Create CSB Instance: Node|React|Vue
 ```javascript
 import CSB from 'csb-node';
+// let CSB = require('csb-node').default;
 
 CSBInstance = new CSB(
     'https://{{domain}}.customersuccessbox.com',
