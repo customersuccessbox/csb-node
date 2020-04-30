@@ -1,4 +1,4 @@
-import CSB from './../dist/node/csb'
+import CSB from './../dist/node/csb.min'
 import lodash from 'lodash'
 
 let CSBInstance

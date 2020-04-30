@@ -1,5 +1,4 @@
 const paths = require('./paths')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   /**
@@ -18,20 +17,6 @@ module.exports = {
     path: paths.build,
     publicPath: '/'
   },
-
-  /**
-   * Plugins
-   *
-   * Customize the Webpack build process.
-   */
-  plugins: [
-    /**
-     * CleanWebpackPlugin
-     *
-     * Removes/cleans build folders and unused assets when rebuilding.
-     */
-    new CleanWebpackPlugin()
-  ],
 
   /**
    * Module

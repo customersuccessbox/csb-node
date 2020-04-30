@@ -2,13 +2,13 @@
   "name": "csb-node",
   "version": "1.0.0",
   "description": "CSB Node|Browser Package to Send Events",
-  "main": "dist/node/csb.js",
+  "main": "dist/node/csb.min.js",
   "author": "Amritpal Singh <amrit@customersuccessbox.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env OUTPUT_TARGET=web webpack --config config/webpack.prod.js",
-    "build:node": "cross-env OUTPUT_TARGET=node webpack --config config/webpack.prod.js",
-    "test": "jest --config jest.config.js --detectOpenHandles"
+    "build": "cross-env OUTPUT_TARGET=web webpack --config config/webpack.prod.js && cross-env OUTPUT_TARGET=web NODE_ENV=production webpack --config config/webpack.prod.js",
+    "build:node": "cross-env OUTPUT_TARGET=node webpack --config config/webpack.prod.js && cross-env OUTPUT_TARGET=node NODE_ENV=production webpack --config config/webpack.prod.js",
+    "test": "cross-env ENDPOINT= API_KEY= jest --config jest.config.js --detectOpenHandles"
   },
   "keywords": [
     "csb",
