@@ -1,6 +1,6 @@
 {
   "name": "csb-node",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "CSB Node|Browser Package to Send Events",
   "repository": "https://github.com/customersuccessbox/csb-node",
   "main": "dist/node/csb.min.js",
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "cross-env OUTPUT_TARGET=web webpack --config config/webpack.prod.js && cross-env OUTPUT_TARGET=web NODE_ENV=production webpack --config config/webpack.prod.js",
     "build:node": "cross-env OUTPUT_TARGET=node webpack --config config/webpack.prod.js && cross-env OUTPUT_TARGET=node NODE_ENV=production webpack --config config/webpack.prod.js",
-    "test": "cross-env ENDPOINT= API_KEY= jest --config jest.config.js --detectOpenHandles"
+    "test": "cross-env ENDPOINT=https://dbz.staging.customersuccessbox.com/ API_KEY=SPAdjtwDFsHv7i4tF5a2Qt1X2U2zOrBYL6DJunSgR50= jest --config jest.config.js --detectOpenHandles"
   },
   "keywords": [
     "csb",
