@@ -1,6 +1,6 @@
 {
   "name": "csb-node",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "CSB Node|Browser Package to Send Events",
   "main": "dist/node/csb.min.js",
   "author": "Amritpal Singh <amrit@customersuccessbox.com>",
