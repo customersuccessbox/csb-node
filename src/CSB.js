@@ -36,20 +36,20 @@ CSB.prototype.logout = function (accountId, userId) {
     return this.transport.post('/api/v1_1/logout', data)
 }
 
-CSB.prototype.account = function (accountId, traits) {
-    traits = traits || {}
+CSB.prototype.account = function (accountId, properties) {
+    properties = properties || {}
     
     if (isRealEmpty(accountId)) {
         throw 'Invalid Account ID'
     }
     
-    traits['account_id'] = accountId;
+    properties['account_id'] = accountId;
     
-    return this.transport.post('/api/v1_1/account', traits)
+    return this.transport.post('/api/v1_1/account', properties)
 }
 
-CSB.prototype.user = function (accountId, userId, traits) {
-    traits = traits || {}
+CSB.prototype.user = function (accountId, userId, properties) {
+    properties = properties || {}
     
     if (isRealEmpty(accountId)) {
         throw 'Invalid Account ID'
@@ -59,14 +59,14 @@ CSB.prototype.user = function (accountId, userId, traits) {
         throw 'Invalid User ID'
     }
     
-    traits['account_id'] = accountId;
-    traits['user_id'] = userId;
+    properties['account_id'] = accountId;
+    properties['user_id'] = userId;
     
-    return this.transport.post('/api/v1_1/user', traits)
+    return this.transport.post('/api/v1_1/user', properties)
 }
 
-CSB.prototype.subscription = function (accountId, subscriptionId, params) {
-    params = params || {}
+CSB.prototype.subscription = function (accountId, subscriptionId, properties) {
+    properties = properties || {}
     
     if (isRealEmpty(accountId)) {
         throw 'Invalid Account ID'
@@ -76,14 +76,14 @@ CSB.prototype.subscription = function (accountId, subscriptionId, params) {
         throw 'Invalid Subscription ID'
     }
     
-    params['account_id'] = accountId;
-    params['subscription_id'] = subscriptionId;
+    properties['account_id'] = accountId;
+    properties['subscription_id'] = subscriptionId;
     
-    return this.transport.post('/api/v1_1/subscription', params)
+    return this.transport.post('/api/v1_1/subscription', properties)
 }
 
-CSB.prototype.invoice = function (accountId, subscriptionId, invoiceId, params) {
-    params = params || {}
+CSB.prototype.invoice = function (accountId, subscriptionId, invoiceId, properties) {
+    properties = properties || {}
     
     if (isRealEmpty(accountId)) {
         if (isRealEmpty(subscriptionId)) {
@@ -96,16 +96,16 @@ CSB.prototype.invoice = function (accountId, subscriptionId, invoiceId, params) 
     }
     
     if (!isRealEmpty(accountId)) {
-        params['account_id'] = accountId;
+        properties['account_id'] = accountId;
     }
     
     if (!isRealEmpty(subscriptionId)) {
-        params['subscription_id'] = subscriptionId;
+        properties['subscription_id'] = subscriptionId;
     }
     
-    params['invoice_id'] = invoiceId;
+    properties['invoice_id'] = invoiceId;
     
-    return this.transport.post('/api/v1_1/invoice', params)
+    return this.transport.post('/api/v1_1/invoice', properties)
 }
 
 CSB.prototype.feature = function (
