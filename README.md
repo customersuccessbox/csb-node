@@ -37,15 +37,26 @@ CSBInstance.login('Account1', 'User1');
 ```javascript
 CSBInstance.logout('Account1', 'User1');
 ```
-##### Account [account(accountId, traits = [])]
+##### Account [account(account_id, traits = [])]
 ```javascript
 CSBInstance.account('Account1', {'trait1' : 'value1', 'trait2' : 'value2', 'custom_Field' : 'custom_value'});
 ```
-##### User [user(accountId, userId, traits = [])]
+##### User [user(account_id, user_id, traits = [])]
 ```javascript
 CSBInstance.user('Account1', 'User1', {'trait1' : 'value1', 'trait2' : 'value2', 'custom_Field' : 'custom_value'});
 ```
-##### Feature [feature(accountId, userId, productId, moduleId, featureId, total = 1)]
+##### Subscription [subscription(account_id, subscription_id, params = [])]
+```javascript
+CSBInstance.subscription('Account1', 'Subscription1', {'param1' : 'value1', 'param2' : 'value2'});
+```
+
+##### Subscription [invoice(account_id = null, subscription_id = null, invoice_id, params = [])]
+```javascript
+CSBInstance.invoice('Account1', null, 'Invoice1', {'param1' : 'value1', 'param2' : 'value2'});
+CSBInstance.invoice(null, 'Subscription1', 'Invoice1', {'param1' : 'value1', 'param2' : 'value2'});
+```
+
+##### Feature [feature(account_id, user_id, product_id, module_id, feature_id, total = 1)]
 ```javascript
 CSBInstance.feature('Account1', 'User1', 'ProductName', 'ModuleName', 'FeatureName', 10);
 ```

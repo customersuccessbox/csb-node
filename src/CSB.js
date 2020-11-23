@@ -1,117 +1,155 @@
 import Transport from './Transport'
-import lodash from 'lodash'
-
-let CSB = function (endpoint, apiKey) {
-  this.transport = new Transport(endpoint, apiKey)
+const isRealEmpty = function (value) {
+    return value === undefined
+        || value === null
+        || (typeof value === 'object'
+            && Object.keys(value).length === 0)
+        || (typeof value === 'string'
+            && value.trim().length === 0)
 }
 
-CSB.prototype.track = function (event, properties) {
-  let data = {
-    accountId: properties['account_id'],
-    userId: properties['user_id'],
-    type: 'track',
-    event: event,
-    timestamp: new Date().toISOString()
-  }
-
-  return this.transport.post('/api_js/v1_1/track', data)
+let CSB = function (endpoint, apiKey) {
+    this.transport = new Transport(endpoint, apiKey)
 }
 
 CSB.prototype.login = function (accountId, userId) {
-  return this.track('User Login', {
-    account_id: accountId,
-    user_id: userId
-  })
+    let data = {
+        account_id: accountId,
+        user_id: userId,
+        type: 'track',
+        event: 'User Login',
+        timestamp: new Date().toISOString()
+    }
+    
+    return this.transport.post('/api/v1_1/login', data)
 }
 
 CSB.prototype.logout = function (accountId, userId) {
-  return this.track('User Logout', {
-    account_id: accountId,
-    user_id: userId
-  })
+    let data = {
+        account_id: accountId,
+        user_id: userId,
+        type: 'track',
+        event: 'User Logout',
+        timestamp: new Date().toISOString()
+    }
+    
+    return this.transport.post('/api/v1_1/logout', data)
 }
 
 CSB.prototype.account = function (accountId, traits) {
-  traits = traits || {}
-
-  if (lodash.isEmpty(accountId)) {
-    throw 'Invalid Account ID'
-  }
-
-  let data = {
-    accountId: accountId,
-    type: 'account',
-    traits: traits,
-    timestamp: new Date().toISOString()
-  }
-
-  return this.transport.post('/api_js/v1_1/account', data)
+    traits = traits || {}
+    
+    if (isRealEmpty(accountId)) {
+        throw 'Invalid Account ID'
+    }
+    
+    traits['account_id'] = accountId;
+    
+    return this.transport.post('/api/v1_1/account', traits)
 }
 
 CSB.prototype.user = function (accountId, userId, traits) {
-  traits = traits || {}
+    traits = traits || {}
+    
+    if (isRealEmpty(accountId)) {
+        throw 'Invalid Account ID'
+    }
+    
+    if (isRealEmpty(userId)) {
+        throw 'Invalid User ID'
+    }
+    
+    traits['account_id'] = accountId;
+    traits['user_id'] = userId;
+    
+    return this.transport.post('/api/v1_1/user', traits)
+}
 
-  if (lodash.isEmpty(accountId)) {
-    throw 'Invalid Account ID'
-  }
+CSB.prototype.subscription = function (accountId, subscriptionId, params) {
+    params = params || {}
+    
+    if (isRealEmpty(accountId)) {
+        throw 'Invalid Account ID'
+    }
+    
+    if (isRealEmpty(subscriptionId)) {
+        throw 'Invalid Subscription ID'
+    }
+    
+    params['account_id'] = accountId;
+    params['subscription_id'] = subscriptionId;
+    
+    return this.transport.post('/api/v1_1/subscription', params)
+}
 
-  if (lodash.isEmpty(userId)) {
-    throw 'Invalid User ID'
-  }
-
-  let data = {
-    accountId: accountId,
-    userId: userId,
-    type: 'user',
-    traits: traits,
-    timestamp: new Date().toISOString()
-  }
-
-  return this.transport.post('/api_js/v1_1/identify', data)
+CSB.prototype.invoice = function (accountId, subscriptionId, invoiceId, params) {
+    params = params || {}
+    
+    if (isRealEmpty(accountId)) {
+        if (isRealEmpty(subscriptionId)) {
+            throw 'Please Provide Subscription ID or Account ID'
+        }
+    }
+    
+    if (isRealEmpty(invoiceId)) {
+        throw 'Invalid Invoice ID'
+    }
+    
+    if (!isRealEmpty(accountId)) {
+        params['account_id'] = accountId;
+    }
+    
+    if (!isRealEmpty(subscriptionId)) {
+        params['subscription_id'] = subscriptionId;
+    }
+    
+    params['invoice_id'] = invoiceId;
+    
+    return this.transport.post('/api/v1_1/invoice', params)
 }
 
 CSB.prototype.feature = function (
-  accountId,
-  userId,
-  productId,
-  moduleId,
-  featureId,
-  total
+    accountId,
+    userId,
+    productId,
+    moduleId,
+    featureId,
+    total
 ) {
-  total = total || 1
-
-  if (lodash.isEmpty(accountId)) {
-    throw 'Invalid Account ID'
-  }
-
-  if (lodash.isEmpty(userId)) {
-    throw 'Invalid User ID'
-  }
-
-  if (lodash.isEmpty(productId)) {
-    throw 'Invalid Product ID'
-  }
-
-  if (lodash.isEmpty(moduleId)) {
-    throw 'Invalid Module ID'
-  }
-
-  if (lodash.isEmpty(featureId)) {
-    throw 'Invalid Feature ID'
-  }
-
-  let data = {
-    accountId: accountId,
-    userId: userId,
-    productId: productId,
-    moduleId: moduleId,
-    featureId: featureId,
-    total: total,
-    type: 'feature',
-    timestamp: new Date().toISOString()
-  }
-
-  return this.transport.post('/api_js/v1_1/feature', data)
+    total = total || 1
+    
+    if (isRealEmpty(accountId)) {
+        throw 'Invalid Account ID'
+    }
+    
+    if (isRealEmpty(userId)) {
+        throw 'Invalid User ID'
+    }
+    
+    if (isRealEmpty(productId)) {
+        throw 'Invalid Product ID'
+    }
+    
+    if (isRealEmpty(moduleId)) {
+        throw 'Invalid Module ID'
+    }
+    
+    if (isRealEmpty(featureId)) {
+        throw 'Invalid Feature ID'
+    }
+    
+    let data = {
+        account_id: accountId,
+        user_id: userId,
+        product_id: productId,
+        module_id: moduleId,
+        feature_id: featureId,
+        total: total,
+        type: 'feature',
+        timestamp: new Date().toISOString()
+    }
+    
+    return this.transport.post('/api/v1_1/feature', data)
 }
 
 export default CSB
