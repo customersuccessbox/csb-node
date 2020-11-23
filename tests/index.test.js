@@ -4,8 +4,8 @@ import lodash from 'lodash'
 let CSBInstance
 let isInstanceEnabled = false
 beforeAll(() => {
-    let endpoint = process.env.ENDPOINT || 'https://dbz.staging.customersuccessbox.com/'
-    let apiKey = process.env.API_KEY || 'SPAdjtwDFsHv7i4tF5a2Qt1X2U2zOrBYL6DJunSgR50='
+    let endpoint = process.env.ENDPOINT || ''
+    let apiKey = process.env.API_KEY || ''
     if (!lodash.isEmpty(endpoint) && !lodash.isEmpty(apiKey)) {
         CSBInstance = new CSB(endpoint, apiKey)
         isInstanceEnabled = true
