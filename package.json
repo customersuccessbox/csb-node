@@ -22,7 +22,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@jest/globals": "^25.5.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.1",
     "clean-webpack-plugin": "^3.0.0",
